@@ -1,62 +1,62 @@
 {
-    "status":  "ok",
-    "updated":  "2026-09-08T13:11:09Z",
-    "items":  [
-                  {
-                      "title":  "WeChat Zero-Click Worm Took Over Accounts on iPhone and Android via Incoming Calls",
-                      "link":  "https://thehackernews.com/2026/09/wechat-zero-click-worm-took-over.html",
-                      "description":  "Researchers at the security firm Calif have built a worm that takes over a WeChat account via an incoming call and\u0026nbsp;demonstrated it spreading\u0026nbsp;among three test phones. The person being called does not have to answer or touch their phone for it to work, but the caller must already be one of t...",
-                      "pubDate":  "Tue, 08 Sep 2026 17:24:29 +0530",
-                      "source":  "thehackernews.com"
-                  },
-                  {
-                      "title":  "What It Took to Reach 1 Billion Build Manifests",
-                      "link":  "https://thehackernews.com/2026/09/what-it-took-to-reach-1-billion-build.html",
-                      "description":  "In the last six months, Chainguard doubled its output from 500 million to more than 1 billion container build manifests. We also surpassed 3,000 unique container images and 675,000 image versions in our catalog. Those are the headline numbers, but I want to share what\u0027s actually behind them. The num...",
-                      "pubDate":  "Tue, 08 Sep 2026 17:19:02 +0530",
-                      "source":  "thehackernews.com"
-                  },
-                  {
-                      "title":  "FreeIPA Flaw Chain Lets Anonymous Clients Create Reusable Administrator Credentials",
-                      "link":  "https://thehackernews.com/2026/09/freeipa-flaw-chain-lets-anonymous.html",
-                      "description":  "A flaw in FreeIPA lets a client that has never logged in create a Kerberos identity of its own choosing in the directory and end up in the administrators group, Red Hat says. FreeIPA is the system that determines who may log in across a Linux domain and maintains all identities in a 389 Directory Se...",
-                      "pubDate":  "Tue, 08 Sep 2026 16:52:07 +0530",
-                      "source":  "thehackernews.com"
-                  },
-                  {
-                      "title":  "Adobe Patches Magento Zero-Day Exploited to Deploy Rust Backdoor and PHP Web Shell",
-                      "link":  "https://thehackernews.com/2026/09/adobe-patches-magento-zero-day.html",
-                      "description":  "Adobe on Monday released security patches to address a maximum-severity flaw impacting Adobe Commerce and Magento Open Source that has come under active exploitation in the wild. The vulnerability, now tracked as CVE-2026-75650 (CVSS score: 10.0), has been codenamed StyleSmuggler by Sansec, which di...",
-                      "pubDate":  "Tue, 08 Sep 2026 14:43:47 +0530",
-                      "source":  "thehackernews.com"
-                  },
-                  {
-                      "title":  "BengalSEO Poisons Bing Search Results to Deliver MayaBot and Tech Support Scams",
-                      "link":  "https://thehackernews.com/2026/09/bengalseo-poisons-bing-search-results.html",
-                      "description":  "Cybersecurity researchers have disclosed details of a sprawling search engine optimization (SEO) poisoning campaign that paves the way for malware deployment and tech support scams. The campaign, discovered by the DFIR Report in March 2026, has been codenamed BengalSEO. It has operated out of the In...",
-                      "pubDate":  "Tue, 08 Sep 2026 14:13:51 +0530",
-                      "source":  "thehackernews.com"
-                  },
-                  {
-                      "title":  "Grindr to Pay £26 Million to Settle U.K. Claims Over HIV Status Data Sharing",
-                      "link":  "https://thehackernews.com/2026/09/grindr-to-pay-26-million-to-settle-uk.html",
-                      "description":  "Online dating app Grindr has opted to pay £26 million ($35.1 million) to settle a lawsuit in the U.K. over allegations that it shared users\u0027 personal information, including their HIV status, with third-parties. Grindr, which is the largest LGBTQ+ dating app, was sued in April 2024, accusing it of vi...",
-                      "pubDate":  "Tue, 08 Sep 2026 12:30:43 +0530",
-                      "source":  "thehackernews.com"
-                  },
-                  {
-                      "title":  "PEEP Turns Chrome and Edge Into Post-Compromise Backdoors for Host Command Execution",
-                      "link":  "https://thehackernews.com/2026/09/peep-turns-chrome-and-edge-into-post.html",
-                      "description":  "Cybersecurity researchers have disclosed details of a complex Chromium-based post-exploitation toolkit called PEEP that masquerades as a bookmarks extension for the web browser. \"Requiring prior administrative or code execution access, its installer injects the extension directly into Chrome/Edge pr...",
-                      "pubDate":  "Mon, 07 Sep 2026 23:42:09 +0530",
-                      "source":  "thehackernews.com"
-                  },
-                  {
-                      "title":  "Fake IT Calls Target Executives in Microsoft 365 Data Theft and Extortion Attacks",
-                      "link":  "https://thehackernews.com/2026/09/microsoft-365-attackers-use-help-desk.html",
-                      "description":  "Threat hunters have disclosed details of a widespread data theft and extortion threat cluster that\u0027s targeting Microsoft 365 and other software-as-a-service (SaaS) offerings through information technology (IT) help desk vishing, adversary-in-the-middle (AitM) token theft, and residential-proxy sign-...",
-                      "pubDate":  "Mon, 07 Sep 2026 21:21:56 +0530",
-                      "source":  "thehackernews.com"
-                  }
-              ]
+  "status": "ok",
+  "updated": "2026-09-08T14:31:50Z",
+  "items": [
+    {
+      "title": "WeChat Zero-Click Worm Took Over Accounts on iPhone and Android via Incoming Calls",
+      "link": "https://thehackernews.com/2026/09/wechat-zero-click-worm-took-over.html",
+      "description": "Researchers at the security firm Calif have built a worm that takes over a WeChat account via an incoming call and&nbsp;demonstrated it spreading&nbsp;among three test phones. The person being called does not have to answer or touch their phone for it to work, but the caller must already be one of t",
+      "pubDate": "Tue, 08 Sep 2026 17:24:29 +0530",
+      "source": "thehackernews.com"
+    },
+    {
+      "title": "What It Took to Reach 1 Billion Build Manifests",
+      "link": "https://thehackernews.com/2026/09/what-it-took-to-reach-1-billion-build.html",
+      "description": "In the last six months, Chainguard doubled its output from 500 million to more than 1 billion container build manifests. We also surpassed 3,000 unique container images and 675,000 image versions in our catalog. Those are the headline numbers, but I want to share what's actually behind them. The num",
+      "pubDate": "Tue, 08 Sep 2026 17:19:02 +0530",
+      "source": "thehackernews.com"
+    },
+    {
+      "title": "FreeIPA Flaw Chain Lets Anonymous Clients Create Reusable Administrator Credentials",
+      "link": "https://thehackernews.com/2026/09/freeipa-flaw-chain-lets-anonymous.html",
+      "description": "A flaw in FreeIPA lets a client that has never logged in create a Kerberos identity of its own choosing in the directory and end up in the administrators group, Red Hat says. FreeIPA is the system that determines who may log in across a Linux domain and maintains all identities in a 389 Directory Se",
+      "pubDate": "Tue, 08 Sep 2026 16:52:07 +0530",
+      "source": "thehackernews.com"
+    },
+    {
+      "title": "Adobe Patches Magento Zero-Day Exploited to Deploy Rust Backdoor and PHP Web Shell",
+      "link": "https://thehackernews.com/2026/09/adobe-patches-magento-zero-day.html",
+      "description": "Adobe on Monday released security patches to address a maximum-severity flaw impacting Adobe Commerce and Magento Open Source that has come under active exploitation in the wild. The vulnerability, now tracked as CVE-2026-75650 (CVSS score: 10.0), has been codenamed StyleSmuggler by Sansec, which di",
+      "pubDate": "Tue, 08 Sep 2026 14:43:47 +0530",
+      "source": "thehackernews.com"
+    },
+    {
+      "title": "BengalSEO Poisons Bing Search Results to Deliver MayaBot and Tech Support Scams",
+      "link": "https://thehackernews.com/2026/09/bengalseo-poisons-bing-search-results.html",
+      "description": "Cybersecurity researchers have disclosed details of a sprawling search engine optimization (SEO) poisoning campaign that paves the way for malware deployment and tech support scams. The campaign, discovered by the DFIR Report in March 2026, has been codenamed BengalSEO. It has operated out of the In",
+      "pubDate": "Tue, 08 Sep 2026 14:13:51 +0530",
+      "source": "thehackernews.com"
+    },
+    {
+      "title": "Grindr to Pay \u00a326 Million to Settle U.K. Claims Over HIV Status Data Sharing",
+      "link": "https://thehackernews.com/2026/09/grindr-to-pay-26-million-to-settle-uk.html",
+      "description": "Online dating app Grindr has opted to pay \u00a326 million ($35.1 million) to settle a lawsuit in the U.K. over allegations that it shared users' personal information, including their HIV status, with third-parties. Grindr, which is the largest LGBTQ+ dating app, was sued in April 2024, accusing it of vi",
+      "pubDate": "Tue, 08 Sep 2026 12:30:43 +0530",
+      "source": "thehackernews.com"
+    },
+    {
+      "title": "PEEP Turns Chrome and Edge Into Post-Compromise Backdoors for Host Command Execution",
+      "link": "https://thehackernews.com/2026/09/peep-turns-chrome-and-edge-into-post.html",
+      "description": "Cybersecurity researchers have disclosed details of a complex Chromium-based post-exploitation toolkit called PEEP that masquerades as a bookmarks extension for the web browser. \"Requiring prior administrative or code execution access, its installer injects the extension directly into Chrome/Edge pr",
+      "pubDate": "Mon, 07 Sep 2026 23:42:09 +0530",
+      "source": "thehackernews.com"
+    },
+    {
+      "title": "Fake IT Calls Target Executives in Microsoft 365 Data Theft and Extortion Attacks",
+      "link": "https://thehackernews.com/2026/09/microsoft-365-attackers-use-help-desk.html",
+      "description": "Threat hunters have disclosed details of a widespread data theft and extortion threat cluster that's targeting Microsoft 365 and other software-as-a-service (SaaS) offerings through information technology (IT) help desk vishing, adversary-in-the-middle (AitM) token theft, and residential-proxy sign-",
+      "pubDate": "Mon, 07 Sep 2026 21:21:56 +0530",
+      "source": "thehackernews.com"
+    }
+  ]
 }

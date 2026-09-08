@@ -82,14 +82,14 @@ def parse_rss(xml_bytes: bytes, source: str, sec_filter: bool = False) -> list:
 
     return items
 
-def write_feed(path: Path, items: list[dict]):
+def write_feed(path: Path, items: list):
     payload = {
         "status":  "ok",
         "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "items":   items,
     }
-    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"  Wrote {len(items)} items → {path.name}")
+    path.write_bytes(json.dumps(payload, indent=2, ensure_ascii=True).encode("utf-8"))
+    print(f"  Wrote {len(items)} items -> {path.name}")
 
 def main():
     print("Fetching The Hacker News…")
