@@ -924,7 +924,8 @@
           Real-time cybersecurity incidents, advisories, and breaking IT security news — aggregated from
           <a href="https://thehackernews.com" target="_blank" rel="noopener" class="text-accent-400 hover:underline">The Hacker News</a>
           and
-          <a href="https://www.cisa.gov" target="_blank" rel="noopener" class="text-accent-400 hover:underline">CISA</a>.
+          <a href="https://www.bleepingcomputer.com/news/security/" target="_blank" rel="noopener" class="text-accent-400 hover:underline">Bleeping Computer Security</a>.
+          Refreshed every 3 hours.
         </p>
       </div>
       <!-- Source switcher -->
@@ -935,7 +936,7 @@
         </button>
         <button id="feed-btn-cisa" onclick="switchFeed('cisa')"
           class="feed-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all">
-          CISA Advisories
+          Bleeping Computer
         </button>
       </div>
     </div>
@@ -1247,35 +1248,31 @@
   const FEEDS = {
     thn: {
       label: 'The Hacker News',
-      /* Primary URL — direct Feedburner feed */
-      url: 'https://feeds.feedburner.com/TheHackersNews',
-      /* Fallback if primary 422s */
-      fallbackUrl: 'https://thehackernews.com/feeds/posts/default',
-      source: 'thehackernews.com',
+      /*
+        Static JSON file committed to the repo by GitHub Actions every 3 hours.
+        No third-party proxy, no CORS, no API keys — served from the same
+        GitHub Pages origin as this page.
+      */
+      url: 'feeds/thn.json',
       sourceLabel: 'THN',
       accentClass: 'sev-info',
       icon: `<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>`,
     },
     cisa: {
-      label: 'CISA Advisories',
+      label: 'Bleeping Computer',
       /*
-        CISA's /all.xml returns a non-standard Atom feed that rss2json rejects (422).
-        Use their Alerts & Advisories RSS feed instead — it's standard RSS 2.0.
+        Static JSON file committed by GitHub Actions — security-filtered
+        articles from Bleeping Computer (ransomware, malware, vuln, security).
       */
-      url: 'https://www.cisa.gov/cybersecurity-advisories/alerts.xml',
-      /* Fallback: Krebs on Security — authoritative infosec news */
-      fallbackUrl: 'https://krebsonsecurity.com/feed/',
-      fallbackLabel: 'Krebs on Security',
-      source: 'cisa.gov',
-      sourceLabel: 'CISA',
+      url: 'feeds/cisa.json',
+      sourceLabel: 'BC Security',
       accentClass: 'sev-critical',
       icon: `<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>`,
     }
   };
 
-  /* RSS2JSON free API — no key needed for ≤10 items, handles CORS */
-  const RSS2JSON = 'https://api.rss2json.com/v1/api.json';
-  const ITEMS_COUNT = 6;
+  /* RSS-to-JSON is gone — feeds are now static files served from this repo */
+  const ITEMS_COUNT = 6; /* kept for reference */
 
   let currentFeed = 'thn';
   let feedCache = {};
@@ -1393,48 +1390,35 @@
     errorEl.classList.add('hidden');
     stampEl && stampEl.classList.add('hidden');
 
-    /* Try primary URL, then fallback URL if primary fails */
-    const urlsToTry = [cfg.url];
-    if (cfg.fallbackUrl) urlsToTry.push(cfg.fallbackUrl);
+    try {
+      /*
+        Fetch the static JSON file that GitHub Actions commits to the repo
+        every 3 hours. Same-origin request — no CORS, no proxy, no API keys.
+        Add cache-buster so stale CDN responses don't hide fresh data.
+      */
+      const bust = Math.floor(Date.now() / (3 * 60 * 60 * 1000)); // changes every 3h
+      const res  = await fetch(`${cfg.url}?v=${bust}`);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
 
-    let items = null;
-    let usedCfg = cfg;
+      const data = await res.json();
+      if (data.status !== 'ok' || !Array.isArray(data.items)) throw new Error('Bad feed data');
 
-    for (let i = 0; i < urlsToTry.length; i++) {
-      try {
-        const apiUrl = `${RSS2JSON}?rss_url=${encodeURIComponent(urlsToTry[i])}&count=${ITEMS_COUNT}`;
-        const res    = await fetch(apiUrl);
-        if (!res.ok) { console.warn('[ThreatFeed] HTTP', res.status, 'for', urlsToTry[i]); continue; }
+      feedCache[feedKey] = { items: data.items, cfg, ts: now };
+      renderItems(data.items, cfg);
 
-        const data = await res.json();
-        if (data.status !== 'ok' || !Array.isArray(data.items) || data.items.length === 0) {
-          console.warn('[ThreatFeed] Bad data from', urlsToTry[i], data.message || '');
-          continue;
-        }
-
-        items = data.items;
-        /* If we fell back, update the sourceLabel in a clone of cfg */
-        if (i > 0 && cfg.fallbackLabel) {
-          usedCfg = { ...cfg, sourceLabel: cfg.fallbackLabel };
-        }
-        break; /* success */
-      } catch (err) {
-        console.warn('[ThreatFeed] fetch error for', urlsToTry[i], err);
+      if (timeEl) {
+        const updated = data.updated ? new Date(data.updated) : new Date();
+        timeEl.textContent = updated.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })
+                           + ' · refreshed every 3h via GitHub Actions';
       }
-    }
+      if (stampEl) stampEl.classList.remove('hidden');
 
-    if (!items) {
+    } catch (err) {
+      console.warn('[ThreatFeed]', err);
       loadingEl.classList.add('hidden');
       itemsEl.classList.add('hidden');
       errorEl.classList.remove('hidden');
-      return;
     }
-
-    feedCache[feedKey] = { items, cfg: usedCfg, ts: now };
-    renderItems(items, usedCfg);
-
-    if (timeEl) timeEl.textContent = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    if (stampEl) stampEl.classList.remove('hidden');
   }
 
   function renderItems(items, cfg) {
