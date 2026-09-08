@@ -1400,7 +1400,9 @@
       const res  = await fetch(`${cfg.url}?v=${bust}`);
       if (!res.ok) throw new Error('HTTP ' + res.status);
 
-      const data = await res.json();
+      /* Strip UTF-8 BOM if present (PowerShell sometimes adds it) */
+      const text = (await res.text()).replace(/^\uFEFF/, '');
+      const data = JSON.parse(text);
       if (data.status !== 'ok' || !Array.isArray(data.items)) throw new Error('Bad feed data');
 
       feedCache[feedKey] = { items: data.items, cfg, ts: now };
