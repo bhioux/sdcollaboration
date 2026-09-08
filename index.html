@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
@@ -455,6 +455,105 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
 .hidden{display:none!important}
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:translateY(0)}
+
+/* ── HERO ANIMATIONS ──────────────────────────── */
+/* Image entrance: scale up + fade in */
+@keyframes heroImgIn{
+  from{opacity:0;transform:scale(1.06) translateY(16px)}
+  to{opacity:1;transform:scale(1) translateY(0)}
+}
+/* Floating card bob */
+@keyframes bob{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-8px)}
+}
+/* Floating card bob — reversed phase */
+@keyframes bob2{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(8px)}
+}
+/* Subtle continuous slow zoom on hero photo */
+@keyframes slowZoom{
+  from{transform:scale(1)}
+  to{transform:scale(1.06)}
+}
+/* Text words slide up sequentially */
+@keyframes wordUp{
+  from{opacity:0;transform:translateY(28px)}
+  to{opacity:1;transform:translateY(0)}
+}
+/* Entrance shimmer across image */
+@keyframes shimmerIn{
+  0%{left:-100%}
+  100%{left:200%}
+}
+
+/* Hero photo — animated entrance */
+.hero-photo{border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg);
+  aspect-ratio:4/3;background:var(--bg3);position:relative}
+.hero-photo img{
+  width:100%;height:100%;object-fit:cover;
+  animation:heroImgIn .9s cubic-bezier(.22,.68,0,1.2) .3s both,
+             slowZoom 12s ease-in-out 1.2s alternate infinite;
+  transform-origin:center center;
+}
+/* Shimmer sweep over photo on load */
+.hero-photo::after{
+  content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  animation:shimmerIn 1.1s ease .9s forwards;pointer-events:none;z-index:2;
+}
+
+/* Floating cards bob */
+.hero-float-1{
+  bottom:-20px;left:-20px;
+  animation:bob 3.5s ease-in-out 1.4s infinite;
+}
+.hero-float-2{
+  top:-16px;right:-16px;
+  animation:bob2 4s ease-in-out 1.6s infinite;
+}
+
+/* Hero text — staggered word-group reveals */
+.hero-kicker  {animation:wordUp .6s ease .1s both}
+.hero-h1      {animation:wordUp .7s ease .2s both}
+.hero-sub     {animation:wordUp .7s ease .35s both}
+.hero-btns    {animation:wordUp .6s ease .5s both}
+.hero-trust   {animation:wordUp .6s ease .65s both}
+
+/* ── INDUSTRY CARD — photo zoom on hover already set,
+   add entrance animation ─────────────────────────── */
+.ind-card{animation:none}  /* overridden per card via JS class */
+
+/* ── INSIGHT CARD / PROOF photo — subtle lift ────── */
+.ins-card,.proof-feature,.proof-mini{
+  transition:transform .3s ease,box-shadow .3s ease,border-color .25s;
+}
+
+/* ── GENERAL REVEAL VARIANTS ─────────────────────── */
+.reveal-left{opacity:0;transform:translateX(-28px);
+  transition:opacity .65s ease,transform .65s ease}
+.reveal-left.in{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(28px);
+  transition:opacity .65s ease,transform .65s ease}
+.reveal-right.in{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(.94);
+  transition:opacity .6s ease,transform .6s cubic-bezier(.22,.68,0,1.15)}
+.reveal-scale.in{opacity:1;transform:scale(1)}
+
+/* Stats band number count-up visual pulse */
+@keyframes numPop{
+  0%{transform:scale(.8);opacity:0}
+  60%{transform:scale(1.05)}
+  100%{transform:scale(1);opacity:1}
+}
+.stat-n.animated{animation:numPop .55s cubic-bezier(.22,.68,0,1.2) both}
+
+/* ── SOLUTION CARD STAGGER ───────────────────────── */
+.sol-card{opacity:0;transform:translateY(20px);
+  transition:opacity .5s ease,transform .5s ease,
+             box-shadow .25s,border-color .25s,background .2s}
+.sol-card.in{opacity:1;transform:translateY(0)}
   </style>
 </head>
 <body>
@@ -509,7 +608,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
   <div class="wrap">
     <div class="hero-inner">
       <!-- Left -->
-      <div class="reveal">
+      <div>
         <div class="hero-kicker">
           <span class="hero-kicker-dot" aria-hidden="true"></span>
           <span>Enterprise Technology Consulting</span>
@@ -531,9 +630,9 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
       </div>
 
       <!-- Right — photo + floating cards -->
-      <div class="hero-photo-wrap reveal" style="transition-delay:.12s">
+      <div class="hero-photo-wrap reveal-right" style="transition-delay:.1s">
         <div class="hero-photo">
-          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&auto=format&fit=crop" alt="Enterprise technology consulting team collaborating" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&auto=format&fit=crop" alt="Enterprise technology consulting team collaborating" />
         </div>
         <!-- Floating card 1 -->
         <div class="hero-float hero-float-1">
@@ -643,10 +742,10 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
 <section id="how" aria-labelledby="how-title">
   <div class="wrap">
     <div class="how-layout">
-      <div class="how-photo reveal">
+      <div class="how-photo reveal-left">
         <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format&fit=crop" alt="SDC engineers collaborating on enterprise technology solutions" loading="lazy" />
       </div>
-      <div class="reveal" style="transition-delay:.1s">
+      <div class="reveal-right" style="transition-delay:.1s">
         <div class="eyebrow" style="margin-bottom:14px">Why Organisations Choose SDC</div>
         <h2 id="how-title" class="section-title syne">We solve problems that have real business consequences</h2>
         <p style="font-size:16px;color:var(--txt2);margin-bottom:32px;line-height:1.7">Technology challenges are rarely purely technical. They are architectural, organisational, and strategic. We work across all three — and stay until outcomes are measurable.</p>
@@ -709,7 +808,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
       </div>
 
       <div class="ind-card">
-        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=600&q=75&auto=format&fit=crop" alt="Healthcare technology" loading="lazy" />
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=75&auto=format&fit=crop" alt="Healthcare technology" loading="lazy" />
         <div class="ind-overlay"></div>
         <div class="ind-body">
           <div class="ind-label">Healthcare</div>
@@ -940,7 +1039,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
 
       <div class="ins-card">
         <div class="ins-photo">
-          <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=700&q=75&auto=format&fit=crop" alt="Cybersecurity insights" loading="lazy" />
+          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=700&q=75&auto=format&fit=crop" alt="Cybersecurity insights" loading="lazy" />
           <div class="ins-cat-wrap"><span class="chip chip-red">Cybersecurity</span></div>
         </div>
         <div class="ins-body">
@@ -1158,10 +1257,53 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
 
 /* ── SCROLL REVEAL ──────────────────────────────── */
 (function(){
-  const io=new IntersectionObserver(entries=>entries.forEach(e=>{
-    if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}
-  }),{threshold:0.08});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  const CLASSES = ['.reveal','.reveal-left','.reveal-right','.reveal-scale','.sol-card'];
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+
+  CLASSES.forEach(sel => {
+    document.querySelectorAll(sel).forEach((el, i) => {
+      // Stagger sol-cards
+      if (el.classList.contains('sol-card')) {
+        el.style.transitionDelay = (i * 0.07) + 's';
+      }
+      io.observe(el);
+    });
+  });
+
+  // Animate stat numbers when stats band enters view
+  const statBand = document.getElementById('stats-band');
+  if (statBand) {
+    const statIO = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        document.querySelectorAll('.stat-n').forEach((el, i) => {
+          setTimeout(() => el.classList.add('animated'), i * 100);
+        });
+        statIO.disconnect();
+      }
+    }, { threshold: 0.3 });
+    statIO.observe(statBand);
+  }
+
+  // Industry card stagger
+  document.querySelectorAll('.ind-card').forEach((card, i) => {
+    card.classList.add('reveal');
+    card.style.transitionDelay = (i * 0.08) + 's';
+    io.observe(card);
+  });
+
+  // Testimonial card stagger
+  document.querySelectorAll('.testi-card').forEach((card, i) => {
+    card.classList.add('reveal-scale');
+    card.style.transitionDelay = (i * 0.12) + 's';
+    io.observe(card);
+  });
 })();
 
 /* ── FORM ───────────────────────────────────────── */
