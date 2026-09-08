@@ -1,0 +1,93 @@
+name: Fetch Threat Feeds
+
+on:
+  schedule:
+    # Every 3 hours
+    - cron: '0 */3 * * *'
+  # Allow manual trigger from GitHub Actions UI
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch The Hacker News feed
+        run: |
+          curl -s --max-time 15 \
+            -H "Accept: application/rss+xml, application/xml, text/xml" \
+            -H "User-Agent: Mozilla/5.0 (compatible; SDC-ThreatFeed/1.0)" \
+            "https://feeds.feedburner.com/TheHackersNews" \
+            | python3 -c "
+          import sys, json, xml.etree.ElementTree as ET
+          from datetime import datetime
+
+          raw = sys.stdin.read()
+          root = ET.fromstring(raw)
+          ns = {'atom': 'http://www.w3.org/2005/Atom'}
+          channel = root.find('channel')
+          items = []
+
+          for item in (channel.findall('item') if channel else root.findall('atom:entry', ns))[:8]:
+              def t(tag):
+                  el = item.find(tag)
+                  return el.text.strip() if el is not None and el.text else ''
+              items.append({
+                  'title':       t('title'),
+                  'link':        t('link'),
+                  'description': t('description')[:300],
+                  'pubDate':     t('pubDate') or t('{http://www.w3.org/2005/Atom}published'),
+                  'source':      'thehackernews.com'
+              })
+
+          print(json.dumps({'status': 'ok', 'updated': datetime.utcnow().isoformat()+'Z', 'items': items}, indent=2))
+          " > feeds/thn.json || echo '{"status":"error","items":[]}' > feeds/thn.json
+
+      - name: Fetch Bleeping Computer Security feed
+        run: |
+          curl -s --max-time 15 \
+            -H "Accept: application/rss+xml, application/xml, text/xml" \
+            -H "User-Agent: Mozilla/5.0 (compatible; SDC-ThreatFeed/1.0)" \
+            "https://www.bleepingcomputer.com/feed/" \
+            | python3 -c "
+          import sys, json, xml.etree.ElementTree as ET
+          from datetime import datetime
+          import re
+
+          raw = sys.stdin.read()
+          root = ET.fromstring(raw)
+          channel = root.find('channel')
+          items = []
+
+          for item in (channel.findall('item') if channel else [])[:8]:
+              def t(tag):
+                  el = item.find(tag)
+                  return el.text.strip() if el is not None and el.text else ''
+              # only security category items
+              cats = [c.text for c in item.findall('category') if c.text]
+              if not any('security' in (c or '').lower() or 'vulnerability' in (c or '').lower() or 'ransomware' in (c or '').lower() or 'malware' in (c or '').lower() for c in cats):
+                  continue
+              desc = re.sub('<[^>]+>', '', t('description'))[:300]
+              items.append({
+                  'title':       t('title'),
+                  'link':        t('link'),
+                  'description': desc,
+                  'pubDate':     t('pubDate'),
+                  'source':      'bleepingcomputer.com'
+              })
+
+          print(json.dumps({'status': 'ok', 'updated': datetime.utcnow().isoformat()+'Z', 'items': items[:6]}, indent=2))
+          " > feeds/cisa.json || echo '{"status":"error","items":[]}' > feeds/cisa.json
+
+      - name: Commit updated feeds
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add feeds/
+          # Only commit if something changed
+          git diff --staged --quiet || git commit -m "chore: refresh threat feeds [skip ci]"
+          git push
