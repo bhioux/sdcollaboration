@@ -464,7 +464,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
   <div class="wrap">
     <div class="nav-inner">
       <a href="/" class="nav-logo" aria-label="SD Collaborations">
-        <img src="logo-white.svg" alt="SD Collaborations" id="nav-logo" />
+        <img src="logo-black.svg" alt="SD Collaborations" id="nav-logo" />
       </a>
       <div class="nav-links">
         <a class="nav-link" href="#solutions">Solutions</a>
@@ -1126,9 +1126,8 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
   function apply(t){
     html.setAttribute('data-theme',t);
     localStorage.setItem('sdc-t',t);
-    // In light mode nav/footer are light bg → use original (dark) logo
-    // In dark mode → use white logo
-    if(navLogo) navLogo.src = t==='dark'?'logo-white.svg':'logo-original.svg';
+    // Nav: black logo on light bg, white logo on dark bg
+    if(navLogo) navLogo.src = t==='dark' ? 'logo-white.svg' : 'logo-black.svg';
     if(ftLogo)  ftLogo.src  = 'logo-white.svg'; // footer always dark bg
   }
 
