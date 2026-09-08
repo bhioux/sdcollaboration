@@ -47,7 +47,7 @@ def strip_html(text: str) -> str:
     text = re.sub(r"<[^>]+>", "", text or "")
     return re.sub(r"\s+", " ", text).strip()
 
-def parse_rss(xml_bytes: bytes, source: str, sec_filter: bool = False) -> list[dict]:
+def parse_rss(xml_bytes: bytes, source: str, sec_filter: bool = False) -> list:
     root = ET.fromstring(xml_bytes)
     channel = root.find("channel")
     raw_items = (channel.findall("item") if channel is not None else [])[:20]
