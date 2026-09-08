@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SD Collaborations — Enterprise Technology Consulting</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50:  '#eef2ff',
+              100: '#e0e7ff',
+              200: '#c7d2fe',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#1e1b4b',
+              950: '#0f0d2e',
+            },
+            accent: {
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+            },
+            surface: {
+              50:  '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              800: '#1e293b',
+              900: '#0f172a',
+              950: '#020617',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            display: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          },
+          backgroundImage: {
+            'hero-gradient': 'linear-gradient(135deg, #0f0d2e 0%, #1e1b4b 40%, #0f172a 100%)',
+            'section-gradient': 'linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%)',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Smooth transitions ── */
+    * { box-sizing: border-box; }
+    html { font-family: 'Inter', sans-serif; }
+
+    /* ── Nav scroll shadow ── */
+    .nav-scrolled { box-shadow: 0 1px 0 rgba(255,255,255,.06), 0 4px 24px rgba(0,0,0,.35); }
+
+    /* ── Glow card ── */
+    .glow-card {
+      position: relative;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .glow-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 0 1px rgba(99,102,241,.35), 0 12px 40px rgba(99,102,241,.18);
+    }
+
+    /* ── Capability icon ring ── */
+    .cap-icon {
+      background: linear-gradient(135deg, rgba(99,102,241,.18) 0%, rgba(14,165,233,.12) 100%);
+      border: 1px solid rgba(99,102,241,.25);
+    }
+
+    /* ── Stats counter ── */
+    .stat-number {
+      background: linear-gradient(90deg, #818cf8 0%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Mega-menu ── */
+    .mega-menu { display: none; }
+    .nav-item:hover .mega-menu { display: block; }
+
+    /* ── Marquee ── */
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track { animation: marquee 28s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    /* ── Subtle grid overlay on hero ── */
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(99,102,241,.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99,102,241,.07) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+
+    /* ── CTA gradient border ── */
+    .border-gradient {
+      background: linear-gradient(#0f0d2e, #0f0d2e) padding-box,
+                  linear-gradient(90deg, #6366f1, #38bdf8) border-box;
+      border: 1px solid transparent;
+    }
+
+    /* ── Industry card overlay ── */
+    .industry-card-overlay {
+      background: linear-gradient(to top, rgba(15,13,46,.92) 0%, rgba(15,13,46,.25) 60%, transparent 100%);
+    }
+
+    /* ── Pill badge ── */
+    .pill {
+      background: rgba(99,102,241,.12);
+      border: 1px solid rgba(99,102,241,.3);
+      color: #a5b4fc;
+    }
+  </style>
+</head>
+<body class="bg-white text-surface-900 antialiased">
+
+<!-- ═══════════════════════════════════════════════════
+     NAVIGATION
+═══════════════════════════════════════════════════ -->
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-brand-950/95 backdrop-blur-md border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 lg:h-18">
+
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 shrink-0">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center">
+          <span class="text-white font-bold text-sm">SD</span>
+        </div>
+        <div>
+          <span class="text-white font-bold text-lg tracking-tight leading-none">SD Collaborations</span>
+          <span class="block text-accent-400 text-[10px] font-medium tracking-widest uppercase leading-none mt-0.5">Enterprise Technology</span>
+        </div>
+      </a>
+
+      <!-- Primary Nav (desktop) -->
+      <nav class="hidden lg:flex items-center gap-1">
+
+        <!-- Solutions dropdown -->
+        <div class="nav-item relative group">
+          <button class="flex items-center gap-1 text-gray-300 hover:text-white text-sm font-medium px-3 py-2 rounded-md hover:bg-white/5 transition-colors">
+            Solutions
+            <svg class="w-3.5 h-3.5 opacity-60 group-hover:rotate-180 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/></svg>
+          </button>
+          <!-- Mega menu -->
+          <div class="mega-menu absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[580px] bg-brand-950 border border-white/8 rounded-xl shadow-2xl p-6">
+            <p class="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4">Technology Solutions</p>
+            <div class="grid grid-cols-2 gap-1">
+              <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center shrink-0 group-hover:bg-brand-800 transition-colors">
+                  <svg class="w-4 h-4 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <div><p class="text-sm font-medium text-white">AI & Intelligent Automation</p><p class="text-xs text-gray-400 mt-0.5">Strategy, deployment, production AI</p></div>
+              </a>
+              <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center shrink-0 group-hover:bg-brand-800 transition-colors">
+                  <svg class="w-4 h-4 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                </div>
+                <div><p class="text-sm font-medium text-white">Cybersecurity</p><p class="text-xs text-gray-400 mt-0.5">Zero trust, SOC, threat management</p></div>
+              </a>
+              <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center shrink-0 group-hover:bg-brand-800 transition-colors">
+                  <svg class="w-4 h-4 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
+                </div>
+                <div><p class="text-sm font-medium text-white">Enterprise Collaboration</p><p class="text-xs text-gray-400 mt-0.5">Unified comms, Teams, contact center</p></div>
+              </a>
+              <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center shrink-0 group-hover:bg-brand-800 transition-colors">
+                  <svg class="w-4 h-4 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                </div>
+                <div><p class="text-sm font-medium text-white">Cloud & Data Center</p><p class="text-xs text-gray-400 mt-0.5">Migration, hybrid, modernization</p></div>
+              </a>
+              <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center shrink-0 group-hover:bg-brand-800 transition-colors">
+                  <svg class="w-4 h-4 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </div>
+                <div><p class="text-sm font-medium text-white">Application Development</p><p class="text-xs text-gray-400 mt-0.5">Custom platforms &amp; integration</p></div>
+              </a>
+              <a href="#" class="flex items-start gap-3 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+                <div class="w-8 h-8 rounded-lg bg-brand-900 flex items-center justify-center shrink-0 group-hover:bg-brand-800 transition-colors">
+                  <svg class="w-4 h-4 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                </div>
+                <div><p class="text-sm font-medium text-white">Network &amp; Security</p><p class="text-xs text-gray-400 mt-0.5">SD-WAN, infrastructure, access</p></div>
+              </a>
+            </div>
+            <div class="mt-4 pt-4 border-t border-white/6 flex items-center justify-between">
+              <a href="#" class="text-sm text-brand-400 hover:text-brand-300 font-medium flex items-center gap-1">
+                View all solutions
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+              <a href="#" class="text-xs text-gray-400 hover:text-gray-300 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/8 transition-colors">Technology Advisory →</a>
+            </div>
+          </div>
+        </div>
+
+        <a href="#" class="text-gray-300 hover:text-white text-sm font-medium px-3 py-2 rounded-md hover:bg-white/5 transition-colors">Expertise</a>
+        <a href="#" class="text-gray-300 hover:text-white text-sm font-medium px-3 py-2 rounded-md hover:bg-white/5 transition-colors">Industries</a>
+        <a href="#insights" class="text-gray-300 hover:text-white text-sm font-medium px-3 py-2 rounded-md hover:bg-white/5 transition-colors">Insights</a>
+        <a href="#threat-feed" class="flex items-center gap-1.5 text-gray-300 hover:text-white text-sm font-medium px-3 py-2 rounded-md hover:bg-white/5 transition-colors">
+          <span class="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse"></span>
+          Threat Feed
+        </a>
+        <a href="#" class="text-gray-300 hover:text-white text-sm font-medium px-3 py-2 rounded-md hover:bg-white/5 transition-colors">About</a>
+      </nav>
+
+      <!-- CTA -->
+      <div class="hidden lg:flex items-center gap-3">
+        <a href="#contact" class="text-sm font-medium text-gray-300 hover:text-white transition-colors px-3 py-2">Contact</a>
+        <a href="#contact" class="text-sm font-semibold bg-brand-600 hover:bg-brand-500 text-white px-4 py-2 rounded-lg transition-colors">
+          Start a Conversation
+        </a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="lg:hidden text-gray-400 hover:text-white p-2 rounded-md hover:bg-white/5 transition-colors" aria-label="Open menu">
+        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════ -->
+<section class="relative min-h-screen flex items-center bg-hero-gradient overflow-hidden pt-16">
+  <!-- Grid overlay -->
+  <div class="absolute inset-0 hero-grid opacity-60"></div>
+
+  <!-- Radial glow blobs -->
+  <div class="absolute top-1/4 left-1/3 w-[600px] h-[600px] bg-brand-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-accent-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-24 lg:py-32">
+    <div class="max-w-4xl">
+
+      <!-- Eyebrow pill -->
+      <div class="inline-flex items-center gap-2 pill rounded-full px-3 py-1.5 text-xs font-semibold tracking-wide mb-6">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent-400 animate-pulse"></span>
+        Enterprise Technology Consulting
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.06] tracking-tight mb-6">
+        Modernize with
+        <span class="block bg-gradient-to-r from-brand-400 via-accent-400 to-accent-500 bg-clip-text text-transparent">
+          confidence.
+        </span>
+      </h1>
+
+      <!-- Sub-headline -->
+      <p class="text-lg lg:text-xl text-gray-300 leading-relaxed max-w-2xl mb-10 font-light">
+        We help organizations transform AI, communications, networking,
+        cloud, and security environments into resilient technology infrastructure
+        that actually works — and keeps working.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-16">
+        <a href="#contact" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold px-6 py-3.5 rounded-xl transition-all hover:shadow-lg hover:shadow-brand-600/30 text-sm">
+          Start a Conversation
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#solutions" class="inline-flex items-center gap-2 border border-white/15 hover:border-white/30 text-gray-300 hover:text-white font-medium px-6 py-3.5 rounded-xl transition-all text-sm hover:bg-white/5">
+          Explore Capabilities
+        </a>
+      </div>
+
+      <!-- Inline proof strip -->
+      <div class="flex flex-wrap items-center gap-6 pt-6 border-t border-white/8">
+        <div class="flex items-center gap-2 text-gray-400 text-sm">
+          <svg class="w-4 h-4 text-brand-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          Cisco Premier Partner
+        </div>
+        <div class="flex items-center gap-2 text-gray-400 text-sm">
+          <svg class="w-4 h-4 text-brand-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          Microsoft Gold Partner
+        </div>
+        <div class="flex items-center gap-2 text-gray-400 text-sm">
+          <svg class="w-4 h-4 text-brand-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          AWS Advanced Tier
+        </div>
+        <div class="flex items-center gap-2 text-gray-400 text-sm">
+          <svg class="w-4 h-4 text-brand-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+          15+ Years Enterprise Experience
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Decorative right panel (desktop) -->
+  <div class="hidden xl:block absolute right-0 top-0 bottom-0 w-[520px]">
+    <div class="absolute inset-0 bg-gradient-to-l from-transparent to-brand-950/80"></div>
+    <!-- Abstract tech card stack -->
+    <div class="absolute top-1/2 right-12 -translate-y-1/2 space-y-3 w-72">
+      <!-- Card 1 -->
+      <div class="bg-brand-900/60 backdrop-blur border border-white/8 rounded-xl p-4">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center">
+            <div class="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse"></div>
+          </div>
+          <div>
+            <p class="text-white text-xs font-semibold">Infrastructure Health</p>
+            <p class="text-gray-400 text-[10px]">All systems operational</p>
+          </div>
+          <span class="ml-auto text-green-400 text-xs font-bold">99.9%</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <div class="bg-brand-950/50 rounded-lg p-2 text-center"><p class="text-white text-sm font-bold">247</p><p class="text-gray-500 text-[9px]">Endpoints</p></div>
+          <div class="bg-brand-950/50 rounded-lg p-2 text-center"><p class="text-white text-sm font-bold">0</p><p class="text-gray-500 text-[9px]">Incidents</p></div>
+          <div class="bg-brand-950/50 rounded-lg p-2 text-center"><p class="text-white text-sm font-bold">4ms</p><p class="text-gray-500 text-[9px]">Latency</p></div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="bg-brand-900/60 backdrop-blur border border-white/8 rounded-xl p-4">
+        <p class="text-gray-400 text-[10px] font-semibold uppercase tracking-wider mb-3">AI Automation Coverage</p>
+        <div class="space-y-2">
+          <div>
+            <div class="flex justify-between text-[10px] mb-1"><span class="text-gray-300">Workflow Automation</span><span class="text-accent-400">84%</span></div>
+            <div class="h-1.5 bg-brand-950 rounded-full"><div class="h-1.5 bg-gradient-to-r from-brand-500 to-accent-500 rounded-full" style="width:84%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-[10px] mb-1"><span class="text-gray-300">Threat Detection</span><span class="text-accent-400">97%</span></div>
+            <div class="h-1.5 bg-brand-950 rounded-full"><div class="h-1.5 bg-gradient-to-r from-brand-500 to-accent-500 rounded-full" style="width:97%"></div></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-[10px] mb-1"><span class="text-gray-300">Cloud Optimization</span><span class="text-accent-400">71%</span></div>
+            <div class="h-1.5 bg-brand-950 rounded-full"><div class="h-1.5 bg-gradient-to-r from-brand-500 to-accent-500 rounded-full" style="width:71%"></div></div>
+          </div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="bg-brand-900/60 backdrop-blur border border-white/8 rounded-xl p-4">
+        <div class="flex items-center gap-2 mb-2">
+          <div class="w-6 h-6 rounded-full bg-brand-600 flex items-center justify-center">
+            <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <p class="text-white text-xs font-semibold">Security Assessment Complete</p>
+        </div>
+        <p class="text-gray-400 text-[10px] leading-relaxed">Zero critical vulnerabilities detected. 3 recommendations flagged for review. Next scan in 6 hours.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     TRUST / CREDIBILITY BAR
+═══════════════════════════════════════════════════ -->
+<section class="bg-brand-950 border-y border-white/6 py-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
+      <div>
+        <p class="stat-number text-4xl font-extrabold">15+</p>
+        <p class="text-gray-400 text-sm mt-1 font-medium">Years of Experience</p>
+      </div>
+      <div>
+        <p class="stat-number text-4xl font-extrabold">200+</p>
+        <p class="text-gray-400 text-sm mt-1 font-medium">Enterprise Projects</p>
+      </div>
+      <div>
+        <p class="stat-number text-4xl font-extrabold">40+</p>
+        <p class="text-gray-400 text-sm mt-1 font-medium">Certified Experts</p>
+      </div>
+      <div>
+        <p class="stat-number text-4xl font-extrabold">30+</p>
+        <p class="text-gray-400 text-sm mt-1 font-medium">Technology Partners</p>
+      </div>
+      <div class="col-span-2 md:col-span-1">
+        <p class="stat-number text-4xl font-extrabold">8</p>
+        <p class="text-gray-400 text-sm mt-1 font-medium">Industries Served</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     CAPABILITY GRID
+═══════════════════════════════════════════════════ -->
+<section id="solutions" class="py-24 bg-surface-50">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <!-- Section header -->
+    <div class="max-w-2xl mb-14">
+      <span class="inline-block text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3">What We Do</span>
+      <h2 class="text-3xl lg:text-4xl font-bold text-surface-900 tracking-tight mb-4">
+        End-to-end technology capabilities
+      </h2>
+      <p class="text-gray-500 leading-relaxed">
+        From AI strategy to network infrastructure — our practice areas cover every layer
+        of the modern enterprise technology environment.
+      </p>
+    </div>
+
+    <!-- Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+      <!-- AI -->
+      <a href="#" class="glow-card bg-white border border-surface-200 rounded-2xl p-6 group cursor-pointer">
+        <div class="cap-icon w-11 h-11 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        </div>
+        <h3 class="font-bold text-surface-900 mb-2 group-hover:text-brand-700 transition-colors">AI & Intelligent Automation</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Move from pilot to production with a structured AI blueprint — strategy, deployment, and governance included.</p>
+        <div class="mt-4 flex items-center gap-1 text-brand-600 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+          Explore <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- Cybersecurity -->
+      <a href="#" class="glow-card bg-white border border-surface-200 rounded-2xl p-6 group cursor-pointer">
+        <div class="cap-icon w-11 h-11 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        </div>
+        <h3 class="font-bold text-surface-900 mb-2 group-hover:text-brand-700 transition-colors">Cybersecurity</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Zero trust architecture, threat detection, incident response, and compliance frameworks for regulated industries.</p>
+        <div class="mt-4 flex items-center gap-1 text-brand-600 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+          Explore <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- Collaboration -->
+      <a href="#" class="glow-card bg-white border border-surface-200 rounded-2xl p-6 group cursor-pointer">
+        <div class="cap-icon w-11 h-11 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+        </div>
+        <h3 class="font-bold text-surface-900 mb-2 group-hover:text-brand-700 transition-colors">Enterprise Collaboration</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Unified communications, contact center, and workforce productivity platforms designed for enterprise scale.</p>
+        <div class="mt-4 flex items-center gap-1 text-brand-600 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+          Explore <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- Network -->
+      <a href="#" class="glow-card bg-white border border-surface-200 rounded-2xl p-6 group cursor-pointer">
+        <div class="cap-icon w-11 h-11 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        </div>
+        <h3 class="font-bold text-surface-900 mb-2 group-hover:text-brand-700 transition-colors">Network &amp; Security</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">SD-WAN, wireless, campus networking, and perimeter security for high-performance, resilient connectivity.</p>
+        <div class="mt-4 flex items-center gap-1 text-brand-600 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+          Explore <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- Cloud -->
+      <a href="#" class="glow-card bg-white border border-surface-200 rounded-2xl p-6 group cursor-pointer">
+        <div class="cap-icon w-11 h-11 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+        </div>
+        <h3 class="font-bold text-surface-900 mb-2 group-hover:text-brand-700 transition-colors">Cloud &amp; Data Center</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Cloud migration, hybrid infrastructure, and data center modernization aligned to your cost and compliance requirements.</p>
+        <div class="mt-4 flex items-center gap-1 text-brand-600 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+          Explore <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- App Dev -->
+      <a href="#" class="glow-card bg-white border border-surface-200 rounded-2xl p-6 group cursor-pointer">
+        <div class="cap-icon w-11 h-11 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+        </div>
+        <h3 class="font-bold text-surface-900 mb-2 group-hover:text-brand-700 transition-colors">Application Development</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">Custom enterprise applications, integrations, and platform development using modern, maintainable technology.</p>
+        <div class="mt-4 flex items-center gap-1 text-brand-600 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+          Explore <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- Advisory -->
+      <a href="#" class="glow-card bg-white border border-surface-200 rounded-2xl p-6 group cursor-pointer">
+        <div class="cap-icon w-11 h-11 rounded-xl flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        </div>
+        <h3 class="font-bold text-surface-900 mb-2 group-hover:text-brand-700 transition-colors">Technology Advisory</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">CTO-level advisory, roadmap development, and vendor-independent strategy to align technology with business outcomes.</p>
+        <div class="mt-4 flex items-center gap-1 text-brand-600 text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+          Explore <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+      <!-- Staff Aug — highlighted -->
+      <a href="#" class="glow-card bg-brand-950 border border-brand-800 rounded-2xl p-6 group cursor-pointer">
+        <div class="w-11 h-11 rounded-xl bg-brand-800 flex items-center justify-center mb-4">
+          <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        </div>
+        <h3 class="font-bold text-white mb-2">Staff Augmentation</h3>
+        <p class="text-gray-400 text-sm leading-relaxed">Embed certified engineers directly into your team — short-term surge or long-term embedded support.</p>
+        <div class="mt-4 flex items-center gap-1 text-accent-400 text-xs font-semibold">
+          Learn more <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PROBLEMS WE SOLVE  (dark)
+═══════════════════════════════════════════════════ -->
+<section class="py-24 bg-surface-900">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="lg:grid lg:grid-cols-2 lg:gap-20 items-start">
+
+      <!-- Left column -->
+      <div class="mb-12 lg:mb-0 lg:sticky lg:top-28">
+        <span class="inline-block text-xs font-semibold text-accent-400 uppercase tracking-widest mb-3">Why Organizations Choose SDC</span>
+        <h2 class="text-3xl lg:text-4xl font-bold text-white tracking-tight mb-6">
+          We solve technology problems that have real business consequences.
+        </h2>
+        <p class="text-gray-400 leading-relaxed mb-8">
+          Most technology challenges aren't purely technical. They're organizational, architectural,
+          and strategic. We work across all three to deliver change that holds.
+        </p>
+        <a href="#contact" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold px-5 py-3 rounded-xl text-sm transition-colors">
+          Discuss your challenge
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Right column — problem cards -->
+      <div class="space-y-3">
+        <!-- Problem row -->
+        <div class="flex items-start gap-4 bg-white/4 border border-white/7 rounded-xl p-5 hover:bg-white/6 transition-colors">
+          <div class="w-9 h-9 rounded-lg bg-brand-900 border border-brand-700/40 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+          </div>
+          <div>
+            <p class="text-white font-semibold text-sm mb-1">Modernize legacy environments</p>
+            <p class="text-gray-400 text-sm leading-relaxed">Aging infrastructure creates risk, limits agility, and accumulates technical debt. We build realistic migration paths.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-white/4 border border-white/7 rounded-xl p-5 hover:bg-white/6 transition-colors">
+          <div class="w-9 h-9 rounded-lg bg-brand-900 border border-brand-700/40 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <div>
+            <p class="text-white font-semibold text-sm mb-1">Secure critical infrastructure</p>
+            <p class="text-gray-400 text-sm leading-relaxed">Regulatory pressure, expanding threat surfaces, and hybrid environments demand proactive, layered security.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-white/4 border border-white/7 rounded-xl p-5 hover:bg-white/6 transition-colors">
+          <div class="w-9 h-9 rounded-lg bg-brand-900 border border-brand-700/40 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <div>
+            <p class="text-white font-semibold text-sm mb-1">Prepare for AI at scale</p>
+            <p class="text-gray-400 text-sm leading-relaxed">Most AI pilots don't reach production. We fix the operating model and data readiness that AI actually requires.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-white/4 border border-white/7 rounded-xl p-5 hover:bg-white/6 transition-colors">
+          <div class="w-9 h-9 rounded-lg bg-brand-900 border border-brand-700/40 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+          </div>
+          <div>
+            <p class="text-white font-semibold text-sm mb-1">Modernize cloud infrastructure</p>
+            <p class="text-gray-400 text-sm leading-relaxed">Cloud migrations that lack architecture governance become expensive. We design for performance and cost control.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-white/4 border border-white/7 rounded-xl p-5 hover:bg-white/6 transition-colors">
+          <div class="w-9 h-9 rounded-lg bg-brand-900 border border-brand-700/40 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+          </div>
+          <div>
+            <p class="text-white font-semibold text-sm mb-1">Improve enterprise collaboration</p>
+            <p class="text-gray-400 text-sm leading-relaxed">Fragmented tools reduce productivity. We consolidate and modernize how your teams communicate and work together.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-4 bg-white/4 border border-white/7 rounded-xl p-5 hover:bg-white/6 transition-colors">
+          <div class="w-9 h-9 rounded-lg bg-brand-900 border border-brand-700/40 flex items-center justify-center shrink-0">
+            <svg class="w-4 h-4 text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <div>
+            <p class="text-white font-semibold text-sm mb-1">Scale technical capability</p>
+            <p class="text-gray-400 text-sm leading-relaxed">When internal teams are stretched, we provide certified engineers who integrate cleanly with your existing organization.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     INDUSTRIES
+═══════════════════════════════════════════════════ -->
+<section class="py-24 bg-white" id="industries">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-4">
+      <div class="max-w-xl">
+        <span class="inline-block text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3">Industries</span>
+        <h2 class="text-3xl lg:text-4xl font-bold text-surface-900 tracking-tight">
+          Deep expertise across regulated and complex sectors
+        </h2>
+      </div>
+      <a href="#" class="text-sm font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1 shrink-0">
+        All industries <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <!-- Gov -->
+      <a href="#" class="relative group rounded-2xl overflow-hidden h-56 bg-gradient-to-br from-brand-900 to-brand-950 cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/50 to-brand-950 opacity-80"></div>
+        <div class="industry-card-overlay absolute inset-0"></div>
+        <div class="relative h-full flex flex-col justify-end p-6">
+          <p class="text-xs font-semibold text-accent-400 uppercase tracking-widest mb-1.5">Government &amp; Public Sector</p>
+          <h3 class="text-white font-bold text-lg leading-snug">Secure, compliant infrastructure for critical public services</h3>
+          <div class="mt-3 flex items-center gap-1 text-white/60 text-xs font-medium group-hover:text-white/90 transition-colors">
+            View solutions <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Education -->
+      <a href="#" class="relative group rounded-2xl overflow-hidden h-56 bg-gradient-to-br from-indigo-900 to-brand-950 cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-800/50 to-brand-950 opacity-80"></div>
+        <div class="industry-card-overlay absolute inset-0"></div>
+        <div class="relative h-full flex flex-col justify-end p-6">
+          <p class="text-xs font-semibold text-accent-400 uppercase tracking-widest mb-1.5">Education</p>
+          <h3 class="text-white font-bold text-lg leading-snug">Connected, protected campuses with modern learning environments</h3>
+          <div class="mt-3 flex items-center gap-1 text-white/60 text-xs font-medium group-hover:text-white/90 transition-colors">
+            View solutions <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Healthcare -->
+      <a href="#" class="relative group rounded-2xl overflow-hidden h-56 bg-gradient-to-br from-teal-900 to-brand-950 cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-br from-teal-800/40 to-brand-950 opacity-80"></div>
+        <div class="industry-card-overlay absolute inset-0"></div>
+        <div class="relative h-full flex flex-col justify-end p-6">
+          <p class="text-xs font-semibold text-accent-400 uppercase tracking-widest mb-1.5">Healthcare</p>
+          <h3 class="text-white font-bold text-lg leading-snug">HIPAA-aligned infrastructure protecting patient data and clinical continuity</h3>
+          <div class="mt-3 flex items-center gap-1 text-white/60 text-xs font-medium group-hover:text-white/90 transition-colors">
+            View solutions <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Financial -->
+      <a href="#" class="relative group rounded-2xl overflow-hidden h-56 bg-gradient-to-br from-amber-900 to-brand-950 cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-br from-amber-800/30 to-brand-950 opacity-80"></div>
+        <div class="industry-card-overlay absolute inset-0"></div>
+        <div class="relative h-full flex flex-col justify-end p-6">
+          <p class="text-xs font-semibold text-accent-400 uppercase tracking-widest mb-1.5">Financial Services</p>
+          <h3 class="text-white font-bold text-lg leading-snug">Resilient, auditable systems for compliance-heavy financial environments</h3>
+          <div class="mt-3 flex items-center gap-1 text-white/60 text-xs font-medium group-hover:text-white/90 transition-colors">
+            View solutions <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Enterprise -->
+      <a href="#" class="relative group rounded-2xl overflow-hidden h-56 bg-gradient-to-br from-violet-900 to-brand-950 cursor-pointer">
+        <div class="absolute inset-0 bg-gradient-to-br from-violet-800/40 to-brand-950 opacity-80"></div>
+        <div class="industry-card-overlay absolute inset-0"></div>
+        <div class="relative h-full flex flex-col justify-end p-6">
+          <p class="text-xs font-semibold text-accent-400 uppercase tracking-widest mb-1.5">Enterprise</p>
+          <h3 class="text-white font-bold text-lg leading-snug">Scalable technology programs for mid-to-large enterprise organizations</h3>
+          <div class="mt-3 flex items-center gap-1 text-white/60 text-xs font-medium group-hover:text-white/90 transition-colors">
+            View solutions <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </div>
+        </div>
+      </a>
+
+      <!-- Other / CTA tile -->
+      <a href="#" class="border-2 border-dashed border-surface-200 hover:border-brand-400 rounded-2xl h-56 flex flex-col items-center justify-center gap-3 text-center p-6 transition-colors group cursor-pointer">
+        <div class="w-10 h-10 rounded-full bg-surface-100 group-hover:bg-brand-50 flex items-center justify-center transition-colors">
+          <svg class="w-5 h-5 text-gray-400 group-hover:text-brand-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+        </div>
+        <div>
+          <p class="font-semibold text-surface-900 group-hover:text-brand-700 text-sm transition-colors">Don't see your sector?</p>
+          <p class="text-gray-400 text-xs mt-1">We work across a broad range of industries. Let's talk about yours.</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PROOF / CASE STUDIES
+═══════════════════════════════════════════════════ -->
+<section class="py-24 bg-surface-50" id="case-studies">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-4">
+      <div>
+        <span class="inline-block text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3">Client Outcomes</span>
+        <h2 class="text-3xl lg:text-4xl font-bold text-surface-900 tracking-tight">
+          Results that speak for themselves
+        </h2>
+      </div>
+      <a href="#" class="text-sm font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1 shrink-0">
+        All case studies <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+      <!-- Featured case study -->
+      <div class="lg:col-span-2 glow-card bg-brand-950 rounded-2xl p-8 border border-white/8">
+        <div class="flex flex-wrap gap-2 mb-6">
+          <span class="pill text-[10px] font-semibold uppercase tracking-wider rounded-full px-2.5 py-1">Cybersecurity</span>
+          <span class="pill text-[10px] font-semibold uppercase tracking-wider rounded-full px-2.5 py-1">Government</span>
+        </div>
+        <h3 class="text-2xl font-bold text-white mb-3 leading-snug">Statewide agency reduces attack surface by 78% after zero-trust architecture deployment</h3>
+        <p class="text-gray-400 text-sm leading-relaxed mb-6">A mid-Atlantic government agency operating across 14 offices faced mounting credential-based attack pressure. SDC designed and deployed a zero-trust network access architecture that eliminated legacy VPN exposure and centralized identity governance.</p>
+        <div class="grid grid-cols-3 gap-4 mb-6">
+          <div class="bg-brand-900/60 rounded-xl p-4 text-center">
+            <p class="text-2xl font-extrabold text-accent-400">78%</p>
+            <p class="text-gray-400 text-xs mt-1">Attack surface reduction</p>
+          </div>
+          <div class="bg-brand-900/60 rounded-xl p-4 text-center">
+            <p class="text-2xl font-extrabold text-accent-400">14</p>
+            <p class="text-gray-400 text-xs mt-1">Sites migrated</p>
+          </div>
+          <div class="bg-brand-900/60 rounded-xl p-4 text-center">
+            <p class="text-2xl font-extrabold text-accent-400">6 wks</p>
+            <p class="text-gray-400 text-xs mt-1">Deployment time</p>
+          </div>
+        </div>
+        <a href="#" class="inline-flex items-center gap-2 text-sm font-semibold text-accent-400 hover:text-accent-300 transition-colors">
+          Read full case study <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Side case studies -->
+      <div class="flex flex-col gap-4">
+
+        <div class="glow-card bg-white border border-surface-200 rounded-2xl p-6 flex-1">
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-surface-100 text-gray-500 text-[10px] font-semibold uppercase tracking-wider rounded-full px-2.5 py-1">Cloud</span>
+            <span class="bg-surface-100 text-gray-500 text-[10px] font-semibold uppercase tracking-wider rounded-full px-2.5 py-1">Healthcare</span>
+          </div>
+          <h3 class="font-bold text-surface-900 mb-2 leading-snug text-sm">Regional health system moves 120 workloads to hybrid cloud in 90 days</h3>
+          <p class="text-gray-500 text-xs leading-relaxed mb-4">Eliminated on-premises hardware refresh costs and improved DR recovery time from 18 hours to under 45 minutes.</p>
+          <a href="#" class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+            Read more <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="glow-card bg-white border border-surface-200 rounded-2xl p-6 flex-1">
+          <div class="flex flex-wrap gap-2 mb-4">
+            <span class="bg-surface-100 text-gray-500 text-[10px] font-semibold uppercase tracking-wider rounded-full px-2.5 py-1">AI</span>
+            <span class="bg-surface-100 text-gray-500 text-[10px] font-semibold uppercase tracking-wider rounded-full px-2.5 py-1">Financial Services</span>
+          </div>
+          <h3 class="font-bold text-surface-900 mb-2 leading-snug text-sm">National lender deploys AI document processing, cutting review time by 60%</h3>
+          <p class="text-gray-500 text-xs leading-relaxed mb-4">SDC designed the data pipeline, governance model, and production deployment that took the initiative from pilot to live within a single quarter.</p>
+          <a href="#" class="text-xs font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1">
+            Read more <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="mt-10 bg-white border border-surface-200 rounded-2xl p-8 flex flex-col sm:flex-row items-start gap-6">
+      <div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center shrink-0 text-brand-700 font-bold text-lg">JW</div>
+      <div>
+        <p class="text-surface-900 font-medium leading-relaxed mb-3 text-sm">"SDC didn't hand us a report and leave. They built it with us, transferred the knowledge to our team, and stayed until we were confident. That's the difference between a vendor and a partner."</p>
+        <p class="text-gray-500 text-xs font-semibold">Jason W. — CTO, Mid-Atlantic Government Agency</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     PARTNER LOGOS  (marquee)
+═══════════════════════════════════════════════════ -->
+<section class="py-16 bg-white border-y border-surface-100">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 mb-8 text-center">
+    <p class="text-xs font-semibold text-gray-400 uppercase tracking-widest">Technology Partners &amp; Certifications</p>
+  </div>
+  <div class="overflow-hidden">
+    <div class="marquee-track flex gap-12 w-max items-center">
+      <!-- Partner blocks (repeated for seamless loop) -->
+      <div class="flex gap-12 items-center">
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Cisco</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Microsoft</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">AWS</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Palo Alto Networks</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">VMware</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Fortinet</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Google Cloud</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Juniper</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">CrowdStrike</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">ServiceNow</span></div>
+      </div>
+      <!-- duplicate for seamless -->
+      <div class="flex gap-12 items-center" aria-hidden="true">
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Cisco</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Microsoft</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">AWS</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Palo Alto Networks</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">VMware</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Fortinet</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Google Cloud</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">Juniper</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">CrowdStrike</span></div>
+        <div class="h-8 flex items-center px-4 opacity-40 hover:opacity-100 transition-opacity"><span class="font-bold text-xl text-gray-600 tracking-tight whitespace-nowrap">ServiceNow</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     INSIGHTS
+═══════════════════════════════════════════════════ -->
+<section class="py-24 bg-surface-50" id="insights">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-12 gap-4">
+      <div>
+        <span class="inline-block text-xs font-semibold text-brand-600 uppercase tracking-widest mb-3">Insights</span>
+        <h2 class="text-3xl lg:text-4xl font-bold text-surface-900 tracking-tight">
+          Perspectives from the field
+        </h2>
+      </div>
+      <a href="#" class="text-sm font-semibold text-brand-600 hover:text-brand-700 flex items-center gap-1 shrink-0">
+        All insights <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      <!-- Article 1 -->
+      <a href="#" class="glow-card bg-white border border-surface-200 rounded-2xl overflow-hidden group">
+        <div class="h-40 bg-gradient-to-br from-brand-900 to-brand-800 relative">
+          <div class="absolute inset-0 hero-grid opacity-40"></div>
+          <div class="absolute bottom-4 left-4"><span class="pill text-[10px] font-semibold uppercase tracking-wider rounded-full px-2.5 py-1">AI</span></div>
+        </div>
+        <div class="p-5">
+          <p class="text-gray-400 text-xs mb-2">August 2026 · 6 min read</p>
+          <h3 class="font-bold text-surface-900 mb-2 leading-snug group-hover:text-brand-700 transition-colors">Why 95% of GenAI pilots fail to reach production — and what the 5% do differently</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Most AI initiatives stall not on the model, but on data readiness, governance, and operating model gaps. Here's the pattern we keep seeing.</p>
+        </div>
+      </a>
+
+      <!-- Article 2 -->
+      <a href="#" class="glow-card bg-white border border-surface-200 rounded-2xl overflow-hidden group">
+        <div class="h-40 bg-gradient-to-br from-teal-900 to-brand-900 relative">
+          <div class="absolute inset-0 hero-grid opacity-40"></div>
+          <div class="absolute bottom-4 left-4"><span class="pill text-[10px] font-semibold uppercase tracking-wider rounded-full px-2.5 py-1">Cybersecurity</span></div>
+        </div>
+        <div class="p-5">
+          <p class="text-gray-400 text-xs mb-2">July 2026 · 8 min read</p>
+          <h3 class="font-bold text-surface-900 mb-2 leading-snug group-hover:text-brand-700 transition-colors">Zero trust is not a product. It's an architecture decision that takes 18 months to get right.</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Vendors sell zero trust as a switch you flip. The organizations that succeed treat it as an identity-first program with staged rollouts.</p>
+        </div>
+      </a>
+
+      <!-- Article 3 -->
+      <a href="#" class="glow-card bg-white border border-surface-200 rounded-2xl overflow-hidden group">
+        <div class="h-40 bg-gradient-to-br from-violet-900 to-brand-900 relative">
+          <div class="absolute inset-0 hero-grid opacity-40"></div>
+          <div class="absolute bottom-4 left-4"><span class="pill text-[10px] font-semibold uppercase tracking-wider rounded-full px-2.5 py-1">Cloud</span></div>
+        </div>
+        <div class="p-5">
+          <p class="text-gray-400 text-xs mb-2">June 2026 · 5 min read</p>
+          <h3 class="font-bold text-surface-900 mb-2 leading-snug group-hover:text-brand-700 transition-colors">The cloud cost problem hiding inside your tagging strategy (or lack of one)</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Organizations consistently over-spend on cloud by 25–40%. The root cause is almost always governance, not service selection.</p>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     LIVE THREAT INTELLIGENCE FEED
+═══════════════════════════════════════════════════ -->
+<section id="threat-feed" class="py-24 bg-surface-900 relative overflow-hidden">
+  <!-- subtle grid -->
+  <div class="absolute inset-0 hero-grid opacity-20"></div>
+  <!-- glow -->
+  <div class="absolute -top-40 right-1/4 w-[500px] h-[400px] bg-red-900/10 rounded-full blur-[120px] pointer-events-none"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-8">
+
+    <!-- Section header -->
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between mb-10 gap-4">
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="inline-block text-xs font-semibold text-red-400 uppercase tracking-widest">Live Intelligence</span>
+          <span class="flex items-center gap-1.5 bg-red-500/10 border border-red-500/20 rounded-full px-2.5 py-0.5 text-[10px] font-bold text-red-400 uppercase tracking-wider">
+            <span class="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse"></span>
+            Live
+          </span>
+        </div>
+        <h2 class="text-3xl lg:text-4xl font-bold text-white tracking-tight">
+          Global Threat Intelligence
+        </h2>
+        <p class="text-gray-400 mt-2 text-sm max-w-xl">
+          Real-time cybersecurity incidents, advisories, and breaking IT security news — aggregated from
+          <a href="https://thehackernews.com" target="_blank" rel="noopener" class="text-accent-400 hover:underline">The Hacker News</a>
+          and
+          <a href="https://www.cisa.gov" target="_blank" rel="noopener" class="text-accent-400 hover:underline">CISA</a>.
+        </p>
+      </div>
+      <!-- Source switcher -->
+      <div class="flex items-center gap-2 shrink-0">
+        <button id="feed-btn-thn" onclick="switchFeed('thn')"
+          class="feed-tab-btn active-feed-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all">
+          The Hacker News
+        </button>
+        <button id="feed-btn-cisa" onclick="switchFeed('cisa')"
+          class="feed-tab-btn px-3 py-1.5 rounded-lg text-xs font-semibold transition-all">
+          CISA Alerts
+        </button>
+      </div>
+    </div>
+
+    <!-- Feed layout: 2-col on desktop -->
+    <div class="lg:grid lg:grid-cols-3 lg:gap-8 items-start">
+
+      <!-- Main feed cards (left 2/3) -->
+      <div class="lg:col-span-2">
+        <!-- Skeleton / Loading state -->
+        <div id="feed-loading" class="space-y-3">
+          <div class="bg-white/4 border border-white/6 rounded-xl p-5 animate-pulse">
+            <div class="h-3 bg-white/10 rounded w-1/4 mb-3"></div>
+            <div class="h-4 bg-white/10 rounded w-3/4 mb-2"></div>
+            <div class="h-3 bg-white/10 rounded w-full mb-1"></div>
+            <div class="h-3 bg-white/10 rounded w-2/3"></div>
+          </div>
+          <div class="bg-white/4 border border-white/6 rounded-xl p-5 animate-pulse">
+            <div class="h-3 bg-white/10 rounded w-1/5 mb-3"></div>
+            <div class="h-4 bg-white/10 rounded w-4/5 mb-2"></div>
+            <div class="h-3 bg-white/10 rounded w-full mb-1"></div>
+            <div class="h-3 bg-white/10 rounded w-1/2"></div>
+          </div>
+          <div class="bg-white/4 border border-white/6 rounded-xl p-5 animate-pulse">
+            <div class="h-3 bg-white/10 rounded w-1/3 mb-3"></div>
+            <div class="h-4 bg-white/10 rounded w-2/3 mb-2"></div>
+            <div class="h-3 bg-white/10 rounded w-full mb-1"></div>
+            <div class="h-3 bg-white/10 rounded w-3/5"></div>
+          </div>
+        </div>
+
+        <!-- Error state (hidden by default) -->
+        <div id="feed-error" class="hidden bg-red-900/20 border border-red-500/20 rounded-xl p-6 text-center">
+          <svg class="w-8 h-8 text-red-400 mx-auto mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg>
+          <p class="text-red-300 text-sm font-medium">Unable to load feed</p>
+          <p class="text-red-400/70 text-xs mt-1 mb-3">Check your connection or try again.</p>
+          <button onclick="loadFeed(currentFeed)" class="text-xs font-semibold text-red-300 hover:text-red-200 border border-red-500/30 rounded-lg px-4 py-1.5 hover:bg-red-500/10 transition-colors">Retry</button>
+        </div>
+
+        <!-- Feed items container -->
+        <div id="feed-items" class="hidden space-y-3"></div>
+      </div>
+
+      <!-- Right panel: context + CTA -->
+      <div class="hidden lg:block space-y-5 mt-0">
+
+        <!-- "Why this matters" card -->
+        <div class="bg-white/4 border border-white/8 rounded-2xl p-6">
+          <div class="w-9 h-9 rounded-lg bg-red-500/15 border border-red-500/20 flex items-center justify-center mb-4">
+            <svg class="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-sm mb-2">Stay ahead of the threat landscape</h3>
+          <p class="text-gray-400 text-xs leading-relaxed">
+            Threat actors don't wait. The organizations that respond fastest to emerging vulnerabilities
+            are the ones with real-time visibility. SDC monitors the global threat landscape continuously
+            so you don't have to.
+          </p>
+        </div>
+
+        <!-- Live stat counters -->
+        <div class="bg-white/4 border border-white/8 rounded-2xl p-5 space-y-4">
+          <p class="text-gray-500 text-[10px] font-semibold uppercase tracking-widest">2026 Global Threat Snapshot</p>
+          <div class="space-y-3">
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-xs">Ransomware incidents YTD</span>
+              <span class="text-red-400 text-xs font-bold">2,847+</span>
+            </div>
+            <div class="w-full h-px bg-white/5"></div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-xs">Critical CVEs published</span>
+              <span class="text-orange-400 text-xs font-bold">1,203+</span>
+            </div>
+            <div class="w-full h-px bg-white/5"></div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-xs">CISA KEV entries</span>
+              <span class="text-yellow-400 text-xs font-bold">1,100+</span>
+            </div>
+            <div class="w-full h-px bg-white/5"></div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-300 text-xs">Avg breach cost (USD)</span>
+              <span class="text-accent-400 text-xs font-bold">$4.88M</span>
+            </div>
+          </div>
+          <p class="text-gray-600 text-[9px] leading-relaxed">Sources: IBM Cost of a Data Breach 2026, CISA KEV Catalog, industry aggregates.</p>
+        </div>
+
+        <!-- Assess CTA -->
+        <a href="#contact" class="block bg-brand-600 hover:bg-brand-500 transition-colors rounded-2xl p-5 group">
+          <p class="text-white font-bold text-sm mb-1.5 group-hover:text-white">Is your environment exposed?</p>
+          <p class="text-brand-200 text-xs leading-relaxed mb-3">Request a complimentary security assessment from our certified advisors.</p>
+          <span class="inline-flex items-center gap-1 text-white text-xs font-semibold">
+            Request Assessment
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Mobile "assess" CTA (shown only on small screens) -->
+    <div class="mt-8 lg:hidden">
+      <a href="#contact" class="block bg-brand-600 hover:bg-brand-500 transition-colors rounded-2xl p-5">
+        <p class="text-white font-bold text-sm mb-1">Is your environment exposed?</p>
+        <p class="text-brand-200 text-xs mb-3">Request a complimentary security assessment.</p>
+        <span class="inline-flex items-center gap-1 text-white text-xs font-semibold">Request Assessment <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg></span>
+      </a>
+    </div>
+
+    <!-- Last updated timestamp -->
+    <p id="feed-timestamp" class="mt-6 text-gray-600 text-xs text-right hidden">
+      Last updated: <span id="feed-time"></span>
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════════════════ -->
+<section id="contact" class="py-24 bg-brand-950 relative overflow-hidden">
+  <div class="absolute inset-0 hero-grid opacity-40"></div>
+  <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+
+  <div class="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
+    <span class="inline-block text-xs font-semibold text-accent-400 uppercase tracking-widest mb-4">Get in Touch</span>
+    <h2 class="text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-5">
+      Have a technology challenge?
+    </h2>
+    <p class="text-gray-300 text-lg mb-10 max-w-xl mx-auto leading-relaxed">
+      Let's discuss what you're trying to accomplish. No sales pressure —
+      just an honest conversation about whether we're the right fit.
+    </p>
+
+    <!-- Contact form -->
+    <div class="bg-brand-900/50 border border-white/8 rounded-2xl p-8 text-left">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1.5" for="name">Full name</label>
+          <input id="name" type="text" placeholder="Jane Smith" class="w-full bg-brand-950/60 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1.5" for="org">Organization</label>
+          <input id="org" type="text" placeholder="Acme Corp" class="w-full bg-brand-950/60 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1.5" for="email">Work email</label>
+          <input id="email" type="email" placeholder="jane@acme.com" class="w-full bg-brand-950/60 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-gray-300 mb-1.5" for="area">Area of interest</label>
+          <select id="area" class="w-full bg-brand-950/60 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-gray-300 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition appearance-none">
+            <option value="" disabled selected>Select a solution area</option>
+            <option>AI & Intelligent Automation</option>
+            <option>Cybersecurity</option>
+            <option>Enterprise Collaboration</option>
+            <option>Cloud & Data Center</option>
+            <option>Network & Security</option>
+            <option>Application Development</option>
+            <option>Technology Advisory</option>
+            <option>Staff Augmentation</option>
+          </select>
+        </div>
+      </div>
+      <div class="mb-5">
+        <label class="block text-xs font-semibold text-gray-300 mb-1.5" for="message">Tell us about your challenge</label>
+        <textarea id="message" rows="4" placeholder="Describe what you're working on or trying to solve..." class="w-full bg-brand-950/60 border border-white/10 rounded-lg px-4 py-2.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition resize-none"></textarea>
+      </div>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <p class="text-gray-500 text-xs">We typically respond within one business day.</p>
+        <button type="submit" class="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold px-6 py-3 rounded-xl text-sm transition-colors shrink-0">
+          Start a Conversation
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════ -->
+<footer class="bg-surface-950 border-t border-white/5 pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 mb-12">
+
+      <!-- Brand -->
+      <div class="col-span-2">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center">
+            <span class="text-white font-bold text-sm">SD</span>
+          </div>
+          <span class="text-white font-bold text-base tracking-tight">SD Collaborations</span>
+        </div>
+        <p class="text-gray-400 text-sm leading-relaxed max-w-xs mb-5">Enterprise technology consulting and solutions for organizations that need to modernize, secure, and scale their technology operations.</p>
+        <div class="flex gap-3">
+          <a href="#" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors" aria-label="LinkedIn">
+            <svg class="w-3.5 h-3.5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" class="w-8 h-8 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors" aria-label="Twitter/X">
+            <svg class="w-3.5 h-3.5 text-gray-400" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.743l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Solutions -->
+      <div>
+        <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Solutions</h4>
+        <ul class="space-y-2.5">
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">AI &amp; Automation</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Cybersecurity</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Collaboration</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Cloud &amp; Data Center</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Network &amp; Security</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">App Development</a></li>
+        </ul>
+      </div>
+
+      <!-- Industries -->
+      <div>
+        <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Industries</h4>
+        <ul class="space-y-2.5">
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Government</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Education</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Healthcare</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Financial Services</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Enterprise</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Company</h4>
+        <ul class="space-y-2.5">
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">About SDC</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Leadership</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Partners</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Certifications</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Careers</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Why SDC</a></li>
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div>
+        <h4 class="text-white text-xs font-semibold uppercase tracking-widest mb-4">Resources</h4>
+        <ul class="space-y-2.5">
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Insights</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Case Studies</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Whitepapers</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Events</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">Contact</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="text-gray-500 text-xs">© 2026 SD Collaborations. All rights reserved.</p>
+      <div class="flex items-center gap-5">
+        <a href="#" class="text-gray-500 hover:text-gray-300 text-xs transition-colors">Privacy Policy</a>
+        <a href="#" class="text-gray-500 hover:text-gray-300 text-xs transition-colors">Terms of Use</a>
+        <a href="#" class="text-gray-500 hover:text-gray-300 text-xs transition-colors">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════
+     THREAT FEED STYLES + LOGIC
+═══════════════════════════════════════════════════ -->
+<style>
+  /* Feed tab buttons */
+  .feed-tab-btn {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    color: #9ca3af;
+  }
+  .feed-tab-btn:hover {
+    background: rgba(255,255,255,.08);
+    color: #e5e7eb;
+  }
+  .active-feed-btn {
+    background: rgba(99,102,241,.18) !important;
+    border-color: rgba(99,102,241,.4) !important;
+    color: #a5b4fc !important;
+  }
+
+  /* Severity badge colours */
+  .sev-critical { background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.3); color: #f87171; }
+  .sev-high     { background: rgba(249,115,22,.13); border-color: rgba(249,115,22,.3); color: #fb923c; }
+  .sev-medium   { background: rgba(234,179,8,.12);  border-color: rgba(234,179,8,.3);  color: #fbbf24; }
+  .sev-info     { background: rgba(56,189,248,.12); border-color: rgba(56,189,248,.28); color: #38bdf8; }
+
+  /* Feed item hover */
+  .feed-item {
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  .feed-item:hover {
+    transform: translateX(3px);
+    border-color: rgba(99,102,241,.35) !important;
+    box-shadow: -3px 0 0 rgba(99,102,241,.5);
+  }
+</style>
+
+<script>
+  /* ─────────────────────────────────────────────────
+     Feed configuration
+  ───────────────────────────────────────────────── */
+  const FEEDS = {
+    thn: {
+      label: 'The Hacker News',
+      url: 'https://feeds.feedburner.com/TheHackersNews',
+      source: 'thehackernews.com',
+      sourceLabel: 'THN',
+      accentClass: 'sev-info',
+      icon: `<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>`,
+    },
+    cisa: {
+      label: 'CISA',
+      url: 'https://www.cisa.gov/cybersecurity-advisories/all.xml',
+      source: 'cisa.gov',
+      sourceLabel: 'CISA',
+      accentClass: 'sev-critical',
+      icon: `<svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>`,
+    }
+  };
+
+  /* RSS2JSON free API — no key needed for ≤10 items, handles CORS */
+  const RSS2JSON = 'https://api.rss2json.com/v1/api.json';
+  const ITEMS_COUNT = 6;
+
+  let currentFeed = 'thn';
+  let feedCache = {};
+
+  /* ─────────────────────────────────────────────────
+     Severity inference from title/description text
+  ───────────────────────────────────────────────── */
+  function inferSeverity(text) {
+    const t = text.toLowerCase();
+    if (/critical|zero.?day|ransomware|actively exploit|emergency|breach|backdoor|wiper/.test(t)) return 'critical';
+    if (/high.severity|rce|remote code|privilege escal|phishing|malware|data leak|stolen/.test(t)) return 'high';
+    if (/medium|patch|update|advisory|vulnerability|flaw|xss|csrf/.test(t)) return 'medium';
+    return 'info';
+  }
+
+  function severityLabel(sev) {
+    return { critical: 'Critical', high: 'High', medium: 'Advisory', info: 'News' }[sev];
+  }
+
+  function severityClass(sev) {
+    return { critical: 'sev-critical', high: 'sev-high', medium: 'sev-medium', info: 'sev-info' }[sev];
+  }
+
+  /* ─────────────────────────────────────────────────
+     Date formatting
+  ───────────────────────────────────────────────── */
+  function relativeTime(dateStr) {
+    const diff = Date.now() - new Date(dateStr).getTime();
+    const m = Math.floor(diff / 60000);
+    const h = Math.floor(m / 60);
+    const d = Math.floor(h / 24);
+    if (m < 2)  return 'Just now';
+    if (m < 60) return `${m}m ago`;
+    if (h < 24) return `${h}h ago`;
+    if (d < 7)  return `${d}d ago`;
+    return new Date(dateStr).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  /* ─────────────────────────────────────────────────
+     Strip HTML from descriptions
+  ───────────────────────────────────────────────── */
+  function stripHtml(html) {
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html || '';
+    return (tmp.textContent || tmp.innerText || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function truncate(str, n) {
+    return str.length > n ? str.slice(0, n).trimEnd() + '…' : str;
+  }
+
+  /* ─────────────────────────────────────────────────
+     Build a single feed card
+  ───────────────────────────────────────────────── */
+  function buildCard(item, feedCfg) {
+    const sev   = inferSeverity((item.title || '') + ' ' + (item.description || ''));
+    const svCls = severityClass(sev);
+    const svLbl = severityLabel(sev);
+    const desc  = truncate(stripHtml(item.description), 140);
+    const time  = relativeTime(item.pubDate);
+    const url   = item.link || '#';
+
+    return `
+      <a href="${url}" target="_blank" rel="noopener noreferrer"
+         class="feed-item group flex gap-4 bg-white/3 hover:bg-white/5 border border-white/7 rounded-xl p-5 cursor-pointer no-underline">
+        <!-- left accent bar -->
+        <div class="flex-none flex flex-col items-center gap-2 pt-0.5">
+          <div class="w-1 flex-1 rounded-full ${sev === 'critical' ? 'bg-red-500' : sev === 'high' ? 'bg-orange-500' : sev === 'medium' ? 'bg-yellow-400' : 'bg-accent-500'} opacity-70"></div>
+        </div>
+        <!-- content -->
+        <div class="flex-1 min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-2">
+            <span class="inline-flex items-center gap-1 border rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${svCls}">
+              ${feedCfg.icon} ${svLbl}
+            </span>
+            <span class="text-gray-500 text-[10px] font-medium">${feedCfg.sourceLabel}</span>
+            <span class="text-gray-600 text-[10px]">·</span>
+            <span class="text-gray-500 text-[10px]">${time}</span>
+          </div>
+          <h3 class="text-white text-sm font-semibold leading-snug mb-1.5 group-hover:text-brand-300 transition-colors line-clamp-2">
+            ${item.title || 'Untitled'}
+          </h3>
+          ${desc ? `<p class="text-gray-400 text-xs leading-relaxed line-clamp-2">${desc}</p>` : ''}
+          <div class="mt-2.5 flex items-center gap-1 text-[10px] font-semibold text-gray-500 group-hover:text-accent-400 transition-colors">
+            Read full story
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+          </div>
+        </div>
+      </a>`;
+  }
+
+  /* ─────────────────────────────────────────────────
+     Fetch & render
+  ───────────────────────────────────────────────── */
+  async function loadFeed(feedKey) {
+    const cfg = FEEDS[feedKey];
+    if (!cfg) return;
+
+    const loadingEl  = document.getElementById('feed-loading');
+    const errorEl    = document.getElementById('feed-error');
+    const itemsEl    = document.getElementById('feed-items');
+    const stampEl    = document.getElementById('feed-timestamp');
+    const timeEl     = document.getElementById('feed-time');
+
+    // Use cache if available (5-min TTL)
+    const now = Date.now();
+    if (feedCache[feedKey] && (now - feedCache[feedKey].ts < 5 * 60 * 1000)) {
+      renderItems(feedCache[feedKey].items, cfg);
+      return;
+    }
+
+    // Show skeleton
+    loadingEl.classList.remove('hidden');
+    itemsEl.classList.add('hidden');
+    errorEl.classList.add('hidden');
+    stampEl && stampEl.classList.add('hidden');
+
+    try {
+      const apiUrl = `${RSS2JSON}?rss_url=${encodeURIComponent(cfg.url)}&count=${ITEMS_COUNT}`;
+      const res    = await fetch(apiUrl);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+
+      const data = await res.json();
+      if (data.status !== 'ok' || !Array.isArray(data.items)) throw new Error(data.message || 'Bad response');
+
+      feedCache[feedKey] = { items: data.items, ts: now };
+      renderItems(data.items, cfg);
+
+      if (timeEl) timeEl.textContent = new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+      if (stampEl) stampEl.classList.remove('hidden');
+
+    } catch (err) {
+      console.warn('[ThreatFeed]', err);
+      loadingEl.classList.add('hidden');
+      itemsEl.classList.add('hidden');
+      errorEl.classList.remove('hidden');
+    }
+  }
+
+  function renderItems(items, cfg) {
+    const loadingEl = document.getElementById('feed-loading');
+    const itemsEl   = document.getElementById('feed-items');
+    const errorEl   = document.getElementById('feed-error');
+
+    itemsEl.innerHTML = items.map(item => buildCard(item, cfg)).join('');
+    loadingEl.classList.add('hidden');
+    errorEl.classList.add('hidden');
+    itemsEl.classList.remove('hidden');
+  }
+
+  /* ─────────────────────────────────────────────────
+     Tab switcher
+  ───────────────────────────────────────────────── */
+  function switchFeed(feedKey) {
+    if (feedKey === currentFeed) return;
+    currentFeed = feedKey;
+
+    // Update tab styles
+    document.querySelectorAll('.feed-tab-btn').forEach(btn => {
+      btn.classList.remove('active-feed-btn');
+    });
+    document.getElementById('feed-btn-' + feedKey)?.classList.add('active-feed-btn');
+
+    loadFeed(feedKey);
+  }
+
+  /* ─────────────────────────────────────────────────
+     Init on DOM ready
+  ───────────────────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', () => {
+    loadFeed('thn');
+
+    // Auto-refresh every 10 minutes
+    setInterval(() => {
+      feedCache = {};   // bust cache
+      loadFeed(currentFeed);
+    }, 10 * 60 * 1000);
+  });
+</script>
+
+</body>
+</html>
