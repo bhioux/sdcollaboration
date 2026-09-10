@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
 /* ── TOKENS ─────────────────────────────────────── */
 :root{
@@ -27,7 +27,7 @@
   --txt1:       #0F172A;
   --txt2:       #475569;
   --txt3:       #94A3B8;
-  --nav-h:      72px;
+  --nav-h:      80px;
   --r:          14px;
   --shadow:     0 1px 3px rgba(0,0,0,.06),0 10px 32px rgba(0,0,0,.08);
   --shadow-lg:  0 4px 6px rgba(0,0,0,.05),0 20px 60px rgba(0,0,0,.12);
@@ -56,7 +56,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 @media(min-width:1280px){.wrap{padding:0 56px}}
 
 /* ── TYPE ────────────────────────────────────────── */
-.syne{font-family:'Syne',sans-serif}
 .eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
 h1,h2,h3,h4{color:var(--txt1);line-height:1.12;letter-spacing:-.02em}
 
@@ -92,7 +91,7 @@ h1,h2,h3,h4{color:var(--txt1);line-height:1.12;letter-spacing:-.02em}
   border-bottom:1px solid var(--border);transition:background .3s,border-color .3s}
 [data-theme="dark"] #nav{background:rgba(11,17,32,.92);border-color:var(--border)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:100%}
-.nav-logo img{height:28px;width:auto}@media(min-width:640px){.nav-logo img{height:34px}}
+.nav-logo img{height:36px;width:auto}@media(min-width:640px){.nav-logo img{height:44px}}
 .nav-links{display:none;gap:2px}
 @media(min-width:960px){.nav-links{display:flex;align-items:center}}
 .nav-link{font-size:13.5px;font-weight:500;color:var(--txt2);
@@ -183,7 +182,7 @@ h1,h2,h3,h4{color:var(--txt1);line-height:1.12;letter-spacing:-.02em}
 section{padding:60px 0}@media(min-width:768px){section{padding:80px 0}}@media(min-width:1024px){section{padding:96px 0}}
 .section-header{margin-bottom:32px}@media(min-width:640px){.section-header{margin-bottom:48px}}
 .section-header .eyebrow{margin-bottom:14px}
-.section-title{font-size:clamp(24px,3.8vw,44px);font-weight:800;margin-bottom:12px;line-height:1.15}
+.section-title{font-size:clamp(22px,3.5vw,40px);font-weight:800;margin-bottom:14px;line-height:1.15;letter-spacing:-.022em;font-family:'Inter',sans-serif}
 .section-sub{font-size:16px;color:var(--txt2);line-height:1.7}@media(min-width:640px){.section-sub{font-size:17px;max-width:560px}}
 .section-row{display:flex;justify-content:space-between;align-items:flex-end;
   gap:20px;flex-wrap:wrap;margin-bottom:52px}
@@ -668,7 +667,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
   <div class="wrap">
     <div class="section-header reveal">
       <div class="eyebrow">What We Do</div>
-      <h2 id="sol-title" class="section-title syne">End-to-end technology capabilities</h2>
+      <h2 id="sol-title" class="section-title">End-to-end technology capabilities</h2>
       <p class="section-sub">Every practice area of the modern enterprise environment — delivered by certified engineers who stay accountable for outcomes, not just delivery.</p>
     </div>
     <div class="sol-grid reveal">
@@ -742,7 +741,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
       </div>
       <div class="reveal-right" style="transition-delay:.1s">
         <div class="eyebrow" style="margin-bottom:14px">Why Organisations Choose SDC</div>
-        <h2 id="how-title" class="section-title syne">We solve problems that have real business consequences</h2>
+        <h2 id="how-title" class="section-title">We solve problems that have real business consequences</h2>
         <p style="font-size:16px;color:var(--txt2);margin-bottom:32px;line-height:1.7">Technology challenges are rarely purely technical. They are architectural, organisational, and strategic. We work across all three — and stay until outcomes are measurable.</p>
         <div class="how-steps">
           <div class="how-step">
@@ -776,7 +775,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
     <div class="section-row reveal">
       <div>
         <div class="eyebrow" style="margin-bottom:12px">Industries</div>
-        <h2 id="ind-title" class="section-title syne">Deep expertise across complex sectors</h2>
+        <h2 id="ind-title" class="section-title">Deep expertise across complex sectors</h2>
       </div>
       <a href="#contact" class="see-all">All industries <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
@@ -852,7 +851,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
     <div class="section-row reveal">
       <div>
         <div class="eyebrow" style="margin-bottom:12px">Client Outcomes</div>
-        <h2 id="proof-title" class="section-title syne">Results that speak for themselves</h2>
+        <h2 id="proof-title" class="section-title">Results that speak for themselves</h2>
       </div>
       <a href="#" class="see-all">All case studies <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
@@ -920,7 +919,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
   <div class="wrap">
     <div class="section-header reveal" style="text-align:center">
       <div class="eyebrow" style="color:rgba(255,255,255,.7)">What Our Clients Say</div>
-      <h2 id="testi-title" class="section-title syne" style="color:#fff">Built with you. Not handed off.</h2>
+      <h2 id="testi-title" class="section-title" style="color:#fff">Built with you. Not handed off.</h2>
       <p style="font-size:17px;color:rgba(255,255,255,.7);max-width:560px;margin:0 auto">The difference between a vendor and a partner is accountability. We stay until outcomes are measurable.</p>
     </div>
     <div class="testi-grid reveal">
@@ -1014,7 +1013,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
     <div class="section-row reveal">
       <div>
         <div class="eyebrow" style="margin-bottom:12px">Insights</div>
-        <h2 id="ins-title" class="section-title syne">Perspectives from the field</h2>
+        <h2 id="ins-title" class="section-title">Perspectives from the field</h2>
       </div>
       <a href="#" class="see-all">All insights <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
     </div>
@@ -1069,7 +1068,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
           <span style="width:7px;height:7px;border-radius:50%;background:#EF4444;animation:blink 2s infinite;flex-shrink:0"></span>
           Live Intelligence
         </div>
-        <h2 id="threat-title" class="section-title syne">Global Threat Intelligence</h2>
+        <h2 id="threat-title" class="section-title">Global Threat Intelligence</h2>
         <p style="font-size:16px;color:var(--txt2);max-width:540px">Real-time cybersecurity incidents from <a href="https://thehackernews.com" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600">The Hacker News</a> and <a href="https://www.bleepingcomputer.com/news/security/" target="_blank" rel="noopener" style="color:var(--blue);font-weight:600">Bleeping Computer Security</a>.</p>
       </div>
     </div>
@@ -1127,7 +1126,7 @@ footer{background:var(--txt1);padding:60px 0 28px;color:rgba(255,255,255,.6)}
           <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?w=800&q=80&auto=format&fit=crop" alt="SDC consulting team meeting with client" loading="lazy" />
         </div>
         <div class="eyebrow" style="margin-bottom:12px">Get in Touch</div>
-        <h2 class="section-title syne" id="contact-title" style="font-size:clamp(26px,3.5vw,38px)">Have a technology challenge?</h2>
+        <h2 class="section-title" id="contact-title" style="font-size:clamp(26px,3.5vw,38px)">Have a technology challenge?</h2>
         <p>Let's talk about what you're trying to accomplish. No sales pitch — just an honest conversation about whether we're the right fit.</p>
         <div class="contact-feats">
           <div class="c-feat">
